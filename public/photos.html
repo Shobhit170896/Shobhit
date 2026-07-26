@@ -1,23 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Protected Photos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Protected Photo Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        .logout-btn {
+            background: #e63946;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .logout-btn:hover {
+            background: #c1121f;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 40px auto;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+            transition: .3s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            display: block;
+        }
+
+        .caption {
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 25px;
+            color: #666;
+        }
+
+        /* Lightbox */
+
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
+
 <body>
 
-  <h1>Protected Photos</h1>
+<header>
+    <h1>📸 Protected Photo Gallery</h1>
 
-  <img
-    src="/protected-images/photo1.jpg"
-    width="300"
-    alt="Photo 1"
-  >
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+</header>
 
-  <img
-    src="/protected-images/photo2.jpg"
-    width="300"
-    alt="Photo 2"
-  >
+<div class="container">
+
+<div class="gallery">
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo1.jpg" alt="Photo 1">
+        <div class="caption">Photo 1</div>
+    </div>
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo2.jpg" alt="Photo 2">
+        <div class="caption">Photo 2</div>
+    </div>
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo3.jpg" alt="Photo 3">
+        <div class="caption">Photo 3</div>
+    </div>
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo4.jpg" alt="Photo 4">
+        <div class="caption">Photo 4</div>
+    </div>
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo5.jpg" alt="Photo 5">
+        <div class="caption">Photo 5</div>
+    </div>
+
+    <div class="photo-card">
+        <img loading="lazy" src="/protected-images/photo6.jpg" alt="Photo 6">
+        <div class="caption">Photo 6</div>
+    </div>
+
+    <!-- Add more photo cards below -->
+
+</div>
+
+</div>
+
+<footer>
+    Protected Gallery © 2026
+</footer>
+
+<div id="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="Enlarged photo">
+</div>
+
+<script>
+const images = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.querySelector(".close");
+
+images.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+    });
+});
+
+closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.style.display = "none";
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        lightbox.style.display = "none";
+    }
+});
+</script>
 
 </body>
 </html>
