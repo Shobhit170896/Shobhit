@@ -1,217 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Protected Photo Gallery</title>
+<title>Protected Photo Gallery</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
 
-        body {
-            background: #f5f5f5;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
 
-        header {
-            background: #222;
-            color: white;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+body{
+    background:#f5f5f5;
+}
 
-        header h1 {
-            font-size: 28px;
-        }
+header{
+    background:#222;
+    color:white;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
 
-        .logout-btn {
-            background: #e63946;
-            color: white;
-            text-decoration: none;
-            padding: 12px 22px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: .3s;
-        }
+header h1{
+    font-size:28px;
+}
 
-        .logout-btn:hover {
-            background: #c1121f;
-        }
+.logout-btn{
+    background:#e63946;
+    color:white;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    transition:.3s;
+}
 
-        .container {
-            width: 95%;
-            max-width: 1400px;
-            margin: 40px auto;
-        }
+.logout-btn:hover{
+    background:#c1121f;
+}
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+.container{
+    width:95%;
+    max-width:1500px;
+    margin:40px auto;
+}
 
-        .photo-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
-            transition: .3s;
-        }
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
 
-        .photo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
-        }
+.photo-card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:.3s;
+}
 
-        .photo-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            cursor: pointer;
-            display: block;
-        }
+.photo-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
 
-        .caption {
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-        }
+.photo-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    cursor:pointer;
+    display:block;
+}
 
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            padding: 25px;
-            color: #666;
-        }
+.caption{
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+}
 
-        /* Lightbox */
+footer{
+    margin-top:40px;
+    text-align:center;
+    padding:25px;
+    color:#666;
+}
 
-        #lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
+/* Lightbox */
 
-        #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-        }
+#lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
 
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-        }
-    </style>
+#lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:35px;
+    color:white;
+    font-size:45px;
+    cursor:pointer;
+}
+
+</style>
 
 </head>
 
 <body>
 
 <header>
-    <h1>📸 Protected Photo Gallery</h1>
 
-    <a href="/logout" class="logout-btn">
-        Logout
-    </a>
+<h1>📸 Protected Photo Gallery</h1>
+
+<a href="/logout" class="logout-btn">
+Logout
+</a>
+
 </header>
 
 <div class="container">
 
-<div class="gallery">
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo1.jpg" alt="Photo 1">
-        <div class="caption">Photo 1</div>
-    </div>
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo2.jpg" alt="Photo 2">
-        <div class="caption">Photo 2</div>
-    </div>
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo3.jpg" alt="Photo 3">
-        <div class="caption">Photo 3</div>
-    </div>
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo4.jpg" alt="Photo 4">
-        <div class="caption">Photo 4</div>
-    </div>
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo5.jpg" alt="Photo 5">
-        <div class="caption">Photo 5</div>
-    </div>
-
-    <div class="photo-card">
-        <img loading="lazy" src="/protected-images/photo6.jpg" alt="Photo 6">
-        <div class="caption">Photo 6</div>
-    </div>
-
-    <!-- Add more photo cards below -->
-
+<div class="gallery" id="gallery">
 </div>
 
 </div>
 
 <footer>
-    Protected Gallery © 2026
+Protected Gallery © 2026
 </footer>
 
 <div id="lightbox">
     <span class="close">&times;</span>
-    <img id="lightbox-img" alt="Enlarged photo">
+    <img id="lightbox-img" alt="">
 </div>
 
 <script>
-const images = document.querySelectorAll(".gallery img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeBtn = document.querySelector(".close");
 
-images.forEach(img => {
-    img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
+// Number of images
+const totalPhotos = 100;
+
+// Gallery container
+const gallery = document.getElementById("gallery");
+
+// Generate gallery automatically
+for(let i=1;i<=totalPhotos;i++){
+
+    const card=document.createElement("div");
+    card.className="photo-card";
+
+    card.innerHTML=`
+        <img
+            loading="lazy"
+            src="/protected-images/photo${i}.jpg"
+            alt="Photo ${i}">
+        <div class="caption">
+            Photo ${i}
+        </div>
+    `;
+
+    gallery.appendChild(card);
+}
+
+// Lightbox
+
+const images=document.querySelectorAll(".gallery img");
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
+const closeBtn=document.querySelector(".close");
+
+images.forEach(img=>{
+
+    img.addEventListener("click",()=>{
+
+        lightbox.style.display="flex";
+        lightboxImg.src=img.src;
+        lightboxImg.alt=img.alt;
+
     });
+
 });
 
-closeBtn.addEventListener("click", () => {
-    lightbox.style.display = "none";
-});
+closeBtn.onclick=()=>{
 
-lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-        lightbox.style.display = "none";
+    lightbox.style.display="none";
+
+};
+
+lightbox.onclick=(e)=>{
+
+    if(e.target===lightbox){
+
+        lightbox.style.display="none";
+
     }
+
+};
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+
+        lightbox.style.display="none";
+
+    }
+
 });
 
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        lightbox.style.display = "none";
-    }
-});
 </script>
 
 </body>
